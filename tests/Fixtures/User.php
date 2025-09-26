@@ -15,4 +15,3 @@ class User extends Authenticatable
 
     public $timestamps = true;
 }
-

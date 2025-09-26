@@ -4,8 +4,8 @@ namespace Inventas\PasswordCompliance\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Inventas\PasswordCompliance\PasswordCompliance as ComplianceService;
 
 class EnsurePasswordReset
@@ -60,4 +60,3 @@ class EnsurePasswordReset
         return $next($request);
     }
 }
-

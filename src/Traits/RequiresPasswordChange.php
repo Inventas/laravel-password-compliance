@@ -2,10 +2,10 @@
 
 namespace Inventas\PasswordCompliance\Traits;
 
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Carbon\Carbon;
-use Inventas\PasswordCompliance\PasswordCompliance as ComplianceService;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Inventas\PasswordCompliance\Models\PasswordResetRequirement;
+use Inventas\PasswordCompliance\PasswordCompliance as ComplianceService;
 
 trait RequiresPasswordChange
 {
@@ -21,8 +21,7 @@ trait RequiresPasswordChange
      * Require the current model to change password until an optional time.
      * Accepts a Carbon instance, a DateTimeInterface or a parsable date string.
      *
-     * @param mixed $until
-     * @param string|null $reason
+     * @param  mixed  $until
      * @return mixed
      */
     public function requirePasswordChange($until = null, ?string $reason = null)

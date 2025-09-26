@@ -30,4 +30,3 @@ it('redirects to the configured password change page when requirement is active'
 
     $response->assertRedirect('/password/change');
 });
-

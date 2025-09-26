@@ -2,9 +2,9 @@
 
 namespace Inventas\PasswordCompliance;
 
-use Inventas\PasswordCompliance\Contracts\PasswordComplianceRepository;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Carbon\Carbon;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Inventas\PasswordCompliance\Contracts\PasswordComplianceRepository;
 
 class PasswordCompliance
 {

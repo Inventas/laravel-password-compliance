@@ -2,10 +2,10 @@
 
 namespace Inventas\PasswordCompliance\Repositories;
 
+use Carbon\Carbon;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Inventas\PasswordCompliance\Contracts\PasswordComplianceRepository;
 use Inventas\PasswordCompliance\Models\PasswordResetRequirement;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Carbon\Carbon;
 
 class EloquentPasswordComplianceRepository implements PasswordComplianceRepository
 {
@@ -21,7 +21,7 @@ class EloquentPasswordComplianceRepository implements PasswordComplianceReposito
             'reason' => $reason,
         ];
 
-        return PasswordResetRequirement::updateOrCreate($attributes, array_filter($values, fn($v) => $v !== null));
+        return PasswordResetRequirement::updateOrCreate($attributes, array_filter($values, fn ($v) => $v !== null));
     }
 
     public function clearRequirement(AuthenticatableContract $user)

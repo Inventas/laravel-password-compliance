@@ -2,11 +2,11 @@
 
 namespace Inventas\PasswordCompliance;
 
+use Inventas\PasswordCompliance\Contracts\PasswordComplianceRepository;
+use Inventas\PasswordCompliance\Middleware\EnsurePasswordReset;
+use Inventas\PasswordCompliance\Repositories\EloquentPasswordComplianceRepository;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Inventas\PasswordCompliance\Contracts\PasswordComplianceRepository;
-use Inventas\PasswordCompliance\Repositories\EloquentPasswordComplianceRepository;
-use Inventas\PasswordCompliance\Middleware\EnsurePasswordReset;
 
 class PasswordComplianceServiceProvider extends PackageServiceProvider
 {

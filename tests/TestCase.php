@@ -3,10 +3,10 @@
 namespace Inventas\PasswordCompliance\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
-use Inventas\PasswordCompliance\PasswordComplianceServiceProvider;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Inventas\PasswordCompliance\PasswordComplianceServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
