@@ -1,5 +1,5 @@
 <?php
 
-use Inventas\LaravelPasswordCompliance\Tests\TestCase;
+use Inventas\PasswordCompliance\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

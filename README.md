@@ -1,84 +1,88 @@
-# Enforce password change for next login in a Laravel app.
+# Laravel Password Compliance
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/inventas/laravel-password-compliance.svg?style=flat-square)](https://packagist.org/packages/inventas/laravel-password-compliance)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/inventas/laravel-password-compliance/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/inventas/laravel-password-compliance/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/inventas/laravel-password-compliance/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/inventas/laravel-password-compliance/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/inventas/laravel-password-compliance.svg?style=flat-square)](https://packagist.org/packages/inventas/laravel-password-compliance)
+A small Laravel package to enforce forced password resets for users.
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Features
+- Programmatic API to require a user to change their password
+- Middleware `password.compliance` to redirect users that must change their password
+- A trait to add convenience methods and relationship to your Authenticatable model
 
-## Support us
+Installation
+1. Install the package (via Composer in your app):
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-password-compliance.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-password-compliance)
+    composer require inventas/laravel-password-compliance
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+2. Publish config and migration:
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+    php artisan vendor:publish --provider="Inventas\PasswordCompliance\PasswordComplianceServiceProvider" --tag="config"
+    php artisan vendor:publish --provider="Inventas\PasswordCompliance\PasswordComplianceServiceProvider" --tag="migrations"
 
-## Installation
+3. Run migrations:
 
-You can install the package via composer:
+    php artisan migrate
 
-```bash
-composer require inventas/laravel-password-compliance
-```
+Configuration
+- `config/password-compliance.php` includes:
+  - `redirect_route` (optional) — route name to redirect to
+  - `redirect_url` — fallback URL
+  - `exempt_routes` — route names to exempt from middleware (avoid redirect loops)
+  - `guard` — optional guard name
 
-You can publish and run the migrations with:
+Usage
+- Trait
+  Add the trait to your `User` model:
 
-```bash
-php artisan vendor:publish --tag="laravel-password-compliance-migrations"
-php artisan migrate
-```
+  ```php
+  use Inventas\PasswordCompliance\Traits\RequiresPasswordChange;
 
-You can publish the config file with:
+  class User extends Authenticatable
+  {
+      use RequiresPasswordChange;
+  }
+  ```
 
-```bash
-php artisan vendor:publish --tag="laravel-password-compliance-config"
-```
+  Then use the convenience methods:
 
-This is the contents of the published config file:
+  ```php
+  // require until a date
+  $user->requirePasswordChange(now()->addDays(7), 'Expired');
 
-```php
-return [
-];
-```
+  // check
+  $user->isPasswordChangeRequired();
 
-Optionally, you can publish the views using
+  // clear after successful change
+  $user->clearPasswordRequirement();
+  ```
 
-```bash
-php artisan vendor:publish --tag="laravel-password-compliance-views"
-```
+- Programmatic API / Facade
 
-## Usage
+  ```php
+  use Inventas\PasswordCompliance\Facades\PasswordCompliance;
 
-```php
-$laravelPasswordCompliance = new Inventas\LaravelPasswordCompliance();
-echo $laravelPasswordCompliance->echoPhrase('Hello, Inventas!');
-```
+  PasswordCompliance::requirePasswordChange($user, null, 'Admin forced reset');
+  ```
 
-## Testing
+- Middleware
 
-```bash
-composer test
-```
+  Apply middleware alias `password.compliance` to routes or route groups:
 
-## Changelog
+  ```php
+  Route::middleware(['auth', 'password.compliance'])->group(function () {
+      // protected routes
+  });
+  ```
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Testing
+- The package includes Pest tests. Run them with:
 
-## Contributing
+    vendor/bin/pest
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Notes
+- If your users use UUIDs or non-integer primary keys, update the migration's `model_id` column accordingly.
 
-## Security Vulnerabilities
+Contributing
+- PRs welcome. Add tests for new behavior and keep backward compatibility.
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+License
+- MIT
 
-## Credits
-
-- [Lennart Fischer](https://github.com/Inventas)
-- [All Contributors](../../contributors)
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

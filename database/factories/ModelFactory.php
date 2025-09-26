@@ -1,6 +1,6 @@
 <?php
 
-namespace Inventas\LaravelPasswordCompliance\Database\Factories;
+namespace Inventas\PasswordCompliance\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

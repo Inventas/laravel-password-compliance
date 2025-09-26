@@ -34,13 +34,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Inventas\\LaravelPasswordCompliance\\": "src/",
-            "Inventas\\LaravelPasswordCompliance\\Database\\Factories\\": "database/factories/"
+            "Inventas\\PasswordCompliance\\": "src/",
+            "Inventas\\PasswordCompliance\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Inventas\\LaravelPasswordCompliance\\Tests\\": "tests/",
+            "Inventas\\PasswordCompliance\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -62,10 +62,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Inventas\\LaravelPasswordCompliance\\LaravelPasswordComplianceServiceProvider"
+                "Inventas\\PasswordCompliance\\PasswordComplianceServiceProvider"
             ],
             "aliases": {
-                "LaravelPasswordCompliance": "Inventas\\LaravelPasswordCompliance\\Facades\\LaravelPasswordCompliance"
+                "PasswordCompliance": "PasswordCompliance"
             }
         }
     },
