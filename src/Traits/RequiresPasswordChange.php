@@ -18,20 +18,20 @@ trait RequiresPasswordChange
     }
 
     /**
-     * Require the current model to change password until an optional time.
+     * Require the current model to change password. The argument is treated as the enforce_at timestamp (null = enforce immediately).
      * Accepts a Carbon instance, a DateTimeInterface or a parsable date string.
      *
-     * @param  mixed  $until
+     * @param  mixed  $enforceAt
      * @return mixed
      */
-    public function requirePasswordChange($until = null, ?string $reason = null)
+    public function requirePasswordChange($enforceAt = null, ?string $reason = null)
     {
-        if ($until !== null && ! $until instanceof Carbon) {
-            $until = Carbon::parse($until);
+        if ($enforceAt !== null && ! $enforceAt instanceof Carbon) {
+            $enforceAt = Carbon::parse($enforceAt);
         }
 
         return app(ComplianceService::class)
-            ->requirePasswordChange($this, $until, $reason);
+            ->requirePasswordChange($this, $enforceAt, $reason);
     }
 
     /**

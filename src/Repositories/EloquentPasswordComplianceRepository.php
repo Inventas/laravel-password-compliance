@@ -17,11 +17,11 @@ class EloquentPasswordComplianceRepository implements PasswordComplianceReposito
         ];
 
         $values = [
-            'required_until' => $until?->toDateTimeString(),
+            'enforce_at' => $until?->toDateTimeString(),
             'reason' => $reason,
         ];
 
-        return PasswordResetRequirement::updateOrCreate($attributes, array_filter($values, fn ($v) => $v !== null));
+        return PasswordResetRequirement::updateOrCreate($attributes, $values);
     }
 
     public function clearRequirement(AuthenticatableContract $user)
@@ -41,11 +41,12 @@ class EloquentPasswordComplianceRepository implements PasswordComplianceReposito
             return false;
         }
 
-        if ($record->required_until === null) {
+        // enforce immediately if NULL, otherwise enforce when now >= enforce_at
+        if ($record->enforce_at === null) {
             return true;
         }
 
-        return $record->required_until->isFuture();
+        return now()->timestamp >= $record->enforce_at->timestamp;
     }
 
     public function getFor(AuthenticatableContract $user)

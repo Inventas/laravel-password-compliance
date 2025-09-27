@@ -12,12 +12,12 @@ class PasswordResetRequirement extends Model
     protected $fillable = [
         'model_type',
         'model_id',
-        'required_until',
+        'enforce_at',
         'reason',
     ];
 
     protected $casts = [
-        'required_until' => 'datetime',
+        'enforce_at' => 'datetime',
     ];
 
     public function model(): MorphTo

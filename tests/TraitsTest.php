@@ -7,7 +7,15 @@ it('can require and clear a password change using the trait', function () {
 
     expect($user->isPasswordChangeRequired())->toBeFalse();
 
+    // enforce in the future -> not required yet under the new semantics
     $user->requirePasswordChange(now()->addHour(), 'policy');
+
+    $fresh = $user->fresh();
+
+    expect($fresh->isPasswordChangeRequired())->toBeFalse();
+
+    // enforce immediately -> required
+    $user->requirePasswordChange(null, 'immediate');
 
     $fresh = $user->fresh();
 

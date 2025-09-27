@@ -8,7 +8,9 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 interface PasswordComplianceRepository
 {
     /**
-     * Mark the given user as requiring a password change until an optional timestamp.
+     * Mark the given user as requiring a password change. The second parameter is
+     * treated as the time when enforcement should start (enforce_at). Passing
+     * null means enforce immediately.
      *
      * @return mixed
      */

@@ -42,7 +42,9 @@ class TestCase extends Orchestra
             $table->id();
             $table->string('model_type');
             $table->unsignedBigInteger('model_id');
-            $table->timestamp('required_until')->nullable();
+            // When enforcement should start (null = enforce immediately)
+            $table->timestamp('enforce_at')->nullable();
+            // Optional reason or metadata
             $table->string('reason')->nullable();
             $table->timestamps();
             $table->unique(['model_type', 'model_id'], 'password_reset_requirements_model_unique');
