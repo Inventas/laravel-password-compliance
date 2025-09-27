@@ -5,23 +5,38 @@ Enforce forced password resets in your Laravel application.
 This package lets you mark users as requiring a password change and redirect them to a dedicated change-password page using a middleware. It provides a small programmatic API, a convenient trait for your Authenticatable model, and a middleware alias you can attach to routes.
 
 
-## Install
+## Installation
+
+You can install the package via composer:
 
 ```bash
 composer require inventas/laravel-password-compliance
 ```
 
-After installing the package you can publish the config file and the migration (the package uses a migration stub which will be published into your application's `database/migrations` folder when you run the vendor:publish command):
+You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Inventas\PasswordCompliance\PasswordComplianceServiceProvider" --tag="config"
-php artisan vendor:publish --provider="Inventas\PasswordCompliance\PasswordComplianceServiceProvider" --tag="migrations"
+php artisan vendor:publish --tag="laravel-password-compliance-migrations"
+php artisan migrate
 ```
 
-Then run the migrations:
+You can publish the config file with:
 
 ```bash
-php artisan migrate
+php artisan vendor:publish --tag="laravel-password-compliance-config"
+```
+
+This is the contents of the published config file:
+
+```php
+return [
+];
+```
+
+Optionally, you can publish the views using
+
+```bash
+php artisan vendor:publish --tag="laravel-password-compliance-views"
 ```
 
 

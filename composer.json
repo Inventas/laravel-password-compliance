@@ -65,7 +65,7 @@
                 "Inventas\\PasswordCompliance\\PasswordComplianceServiceProvider"
             ],
             "aliases": {
-                "PasswordCompliance": "PasswordCompliance"
+                "PasswordCompliance": "Inventas\\PasswordCompliance\\Facades\\PasswordCompliance"
             }
         }
     },

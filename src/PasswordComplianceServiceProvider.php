@@ -24,8 +24,10 @@ class PasswordComplianceServiceProvider extends PackageServiceProvider
             ->hasMigration('create_password_reset_requirements_table');
     }
 
-    public function register(): void
+    public function registeringPackage(): void
     {
+        parent::registeringPackage();
+        
         // Bind the repository contract to the Eloquent implementation
         $this->app->bind(
             PasswordComplianceRepository::class,
@@ -38,8 +40,10 @@ class PasswordComplianceServiceProvider extends PackageServiceProvider
         });
     }
 
-    public function boot(): void
+    public function bootingPackage(): void
     {
+        parent::bootingPackage();
+
         // Register a middleware alias so package consumers can refer to it easily
         $router = $this->app->make('router');
         $router->aliasMiddleware('password.compliance', EnsurePasswordReset::class);
