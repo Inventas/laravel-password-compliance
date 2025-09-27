@@ -14,6 +14,7 @@ class InviteUser extends Mailable
         public string $emailAddress,
         public ?string $name,
         public string $initialPassword,
+        public string $url,
         public ?string $customSubject = null,
     ) {}
 
@@ -23,10 +24,12 @@ class InviteUser extends Mailable
 
         return $this->subject($subject)
             ->markdown('password-compliance::emails.invite')
+            ->to($this->emailAddress, $this->name)
             ->with([
                 'email' => $this->emailAddress,
                 'name' => $this->name,
                 'initialPassword' => $this->initialPassword,
+                'url' => $this->url,
             ]);
     }
 }

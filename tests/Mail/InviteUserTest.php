@@ -7,7 +7,7 @@ it('builds invite email with provided data', function () {
     $name = 'New User';
     $initialPassword = 'initialSecret123!';
 
-    $mailable = new InviteUser($email, $name, $initialPassword);
+    $mailable = new InviteUser($email, $name, $initialPassword, "https://example.org/");
 
     // Render the mailable to HTML and assert the important pieces are present
     $rendered = $mailable->render();
