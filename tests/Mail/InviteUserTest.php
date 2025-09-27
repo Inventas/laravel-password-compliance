@@ -19,4 +19,3 @@ it('builds invite email with provided data', function () {
     // Subject should be set to our invite subject
     expect($mailable->subject)->toContain('invited');
 });
-

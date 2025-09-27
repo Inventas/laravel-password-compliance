@@ -5,7 +5,6 @@ namespace Inventas\PasswordCompliance\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class InviteUser extends Mailable
 {
@@ -17,6 +16,7 @@ class InviteUser extends Mailable
         public string $initialPassword,
         public ?string $customSubject = null,
     ) {}
+
     public function build()
     {
         $subject = $customSubject ?? __('You have been invited — please sign in');
