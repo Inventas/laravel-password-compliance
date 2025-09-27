@@ -16,14 +16,14 @@ composer require inventas/laravel-password-compliance
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-password-compliance-migrations"
+php artisan vendor:publish --tag="password-compliance-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-password-compliance-config"
+php artisan vendor:publish --tag="password-compliance-config"
 ```
 
 This is the contents of the published config file:
@@ -36,7 +36,7 @@ return [
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="laravel-password-compliance-views"
+php artisan vendor:publish --tag="password-compliance-views"
 ```
 
 
