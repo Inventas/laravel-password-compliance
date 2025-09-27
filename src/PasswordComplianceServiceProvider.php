@@ -27,7 +27,7 @@ class PasswordComplianceServiceProvider extends PackageServiceProvider
     public function registeringPackage(): void
     {
         parent::registeringPackage();
-        
+
         // Bind the repository contract to the Eloquent implementation
         $this->app->bind(
             PasswordComplianceRepository::class,
