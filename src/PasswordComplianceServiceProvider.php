@@ -4,6 +4,7 @@ namespace Inventas\PasswordCompliance;
 
 use Inventas\PasswordCompliance\Contracts\PasswordComplianceRepository;
 use Inventas\PasswordCompliance\Middleware\EnsurePasswordReset;
+use Inventas\PasswordCompliance\Middleware\PreventPasswordResetIfNotRequired;
 use Inventas\PasswordCompliance\Repositories\EloquentPasswordComplianceRepository;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -47,5 +48,7 @@ class PasswordComplianceServiceProvider extends PackageServiceProvider
         // Register a middleware alias so package consumers can refer to it easily
         $router = $this->app->make('router');
         $router->aliasMiddleware('password.compliance', EnsurePasswordReset::class);
+        // Alias for preventing access to password-change controllers when not required
+        $router->aliasMiddleware('password.compliance.prevent', PreventPasswordResetIfNotRequired::class);
     }
 }
