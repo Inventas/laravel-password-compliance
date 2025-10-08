@@ -50,4 +50,3 @@ it('redirects away from the change page when the user is not required to change 
 
     $response->assertRedirect('/home');
 });
-

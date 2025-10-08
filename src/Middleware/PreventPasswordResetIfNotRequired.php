@@ -50,4 +50,3 @@ class PreventPasswordResetIfNotRequired
         return $next($request);
     }
 }
-
