@@ -30,15 +30,17 @@ it('allows access to the change page when the user is required to change passwor
 });
 
 it('redirects away from the change page when the user is not required to change password', function () {
-    config()->set('password-compliance.redirect_url', '/home');
+    config()->set('password-compliance.home_url', '/dashboard');
 
     app('router')->get('/password/change', function () {
         return 'change page';
-    })->name('password.change');
+    })
+        ->middleware(['auth', 'password.compliance.prevent'])
+        ->name('password.change');
 
-    app('router')->get('/change', function () {
-        return 'change controller';
-    })->middleware(['auth', 'password.compliance.prevent'])->name('change.route');
+    app('router')->get('/dashboard', function () {
+        return 'dashboard';
+    })->middleware(['auth'])->name('change.route');
 
     // Create and authenticate a user
     $user = User::create(['email' => 'prevent-deny@example.com']);
@@ -46,7 +48,6 @@ it('redirects away from the change page when the user is not required to change 
     // Ensure not required
     $this->actingAs($user);
 
-    $response = $this->get('/change');
-
-    $response->assertRedirect('/home');
+    $response = $this->get('/password/change');
+    $response->assertRedirect('/dashboard');
 });

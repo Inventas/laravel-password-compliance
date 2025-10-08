@@ -34,17 +34,9 @@ class PreventPasswordResetIfNotRequired
 
         if (! $service->isRequired($user)) {
             // Redirect to intended/default location. Use configured redirect_url or root.
-            $redirectUrl = $config['redirect_url'] ?? '/';
+            $redirectUrl = $config['home_url'] ?? '/';
 
-            // If a redirect_route is configured, use that route name's URL
-            $redirectRoute = $config['redirect_route'] ?? null;
-            if ($redirectRoute) {
-                $target = route($redirectRoute);
-            } else {
-                $target = $redirectUrl;
-            }
-
-            return redirect($target);
+            return redirect($redirectUrl);
         }
 
         return $next($request);
